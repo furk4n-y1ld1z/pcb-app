@@ -137,9 +137,7 @@ if uploaded_file is not None and model is not None:
             is_success, buffer = cv2.imencode(".jpg", cv2.cvtColor(annotated_rgb, cv2.COLOR_RGB2BGR))
             annotated_bytes = buffer.tobytes()
             
-            raw_secret = str(st.secrets["DISCORD_WEBHOOK"])
-            start_index = raw_secret.find("http")
-            webhook_url = raw_secret[start_index:].strip().strip("'").strip('"')
+            webhook_url = st.secrets["DISCORD_WEBHOOK"]
             
             try:
                 # Discord allows sending multiple files in one message
