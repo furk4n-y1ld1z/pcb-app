@@ -1,0 +1,8 @@
+streamlit
+ultralytics
+sahi
+opencv-python
+numpy
+Pillow
+requests
+onnxruntime
