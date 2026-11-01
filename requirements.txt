@@ -1,8 +1,6 @@
 streamlit
-ultralytics
+onnxruntime
+onnx
 sahi
 opencv-python-headless
-numpy
-Pillow
 requests
-onnxruntime
