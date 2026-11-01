@@ -1,7 +1,7 @@
 streamlit
 ultralytics
 sahi
-opencv-python
+opencv-python-headless
 numpy
 Pillow
 requests
