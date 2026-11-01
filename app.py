@@ -8,6 +8,7 @@ from sahi import AutoDetectionModel
 from sahi.predict import get_sliced_prediction
 import io
 import requests
+import re
 
 # 1. Page Configuration
 st.set_page_config(page_title="PCB Defect Inspector", page_icon="🔍", layout="wide")
@@ -137,7 +138,9 @@ if uploaded_file is not None and model is not None:
             is_success, buffer = cv2.imencode(".jpg", cv2.cvtColor(annotated_rgb, cv2.COLOR_RGB2BGR))
             annotated_bytes = buffer.tobytes()
             
-            webhook_url = str(st.secrets["DISCORD_WEBHOOK"]).strip(" '\"")
+            raw_secret = str(st.secrets["DISCORD_WEBHOOK"])
+            # This strictly hunts for "https://" and grabs only the valid web link
+            webhook_url = re.search(r'(https://[^\s\'"<>]+)', raw_secret).group(1)
             
             try:
                 # Discord allows sending multiple files in one message
