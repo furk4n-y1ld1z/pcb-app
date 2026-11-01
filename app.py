@@ -138,9 +138,13 @@ if uploaded_file is not None and model is not None:
             is_success, buffer = cv2.imencode(".jpg", cv2.cvtColor(annotated_rgb, cv2.COLOR_RGB2BGR))
             annotated_bytes = buffer.tobytes()
             
+
             raw_secret = str(st.secrets["DISCORD_WEBHOOK"])
-            # This strictly hunts for "https://" and grabs only the valid web link
-            webhook_url = re.search(r'(https://[^\s\'"<>]+)', raw_secret).group(1)
+            # Specifically hunt for the 19-digit ID and the alphanumeric Token, ignoring everything else
+            match = re.search(r'api/webhooks/(\d+)/([A-Za-z0-9_-]+)', raw_secret)
+
+            # Rebuild a pristine, guaranteed-clean URL
+            webhook_url = f"https://discord.com/api/webhooks/{match.group(1)}/{match.group(2)}"
             
             try:
                 # Discord allows sending multiple files in one message
