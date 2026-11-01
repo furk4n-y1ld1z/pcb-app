@@ -155,7 +155,7 @@ if uploaded_file is not None and model is not None:
                 
                 payload = {"content": message}
                 
-                response = requests.post(WEBHOOK_URL, data=payload, files=files)
+                response = requests.post(webhook_url, data=payload, files=files)
                 
                 if response.status_code in [200, 204]:
                     st.success("✅ Alert, notes, and images successfully sent to the QA team!")
